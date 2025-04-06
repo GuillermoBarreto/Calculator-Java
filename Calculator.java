@@ -33,7 +33,13 @@ public class Calculator {
             else {
                 System.out.println("Error: Division by zero is not allowe.");
                 return;
-            }            
+            }          
+            break;
+            default:
+            System.out.println("Error: Invalid operator.");
+            return;  
         }
+        System.out.println("Result: " + result);
+        System.out.print("==================================");
     }
 }
