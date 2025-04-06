@@ -14,6 +14,26 @@ public class Calculator {
         System.out.print("Enter operator (+, -, *, ./): ");
         operator = scanner.next().chartAt(0);
 
-        System.out.print("")
+        System.out.print("Enter second number: ");
+        num2 = scanner.nextDouble();
+
+        switch(operator) {
+            case '+':
+                 result = num1 + num2;
+               break;
+            case '-':
+                 result = num1 - num2;
+               break;
+            case '*':
+            result = num1 * num2;
+            break;
+            case '/':
+            if (num2 != 0)
+            result = num1 / num2;
+            else {
+                System.out.println("Error: Division by zero is not allowe.");
+                return;
+            }            
+        }
     }
 }
