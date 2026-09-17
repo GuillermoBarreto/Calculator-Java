@@ -10,12 +10,20 @@ public class Calculator {
         System.out.println("=== My Personal Calculator ===");
 
         System.out.print("Enter first number: ");
+        if (!scanner.hasNextDouble()) {
+            System.out.println("Error: Please enter a valid number.");
+            return;
+        }
         num1 = scanner.nextDouble(); // using 'scanner'
 
         System.out.print("Enter operator (+, -, *, /): ");
         operator = scanner.next().charAt(0); // fixed typo: was 'chartAt'
 
         System.out.print("Enter second number: ");
+        if (!scanner.hasNextDouble()) {
+            System.out.println("Error: Please enter a valid number.");
+            return;
+        }
         num2 = scanner.nextDouble();
 
         switch (operator) {
