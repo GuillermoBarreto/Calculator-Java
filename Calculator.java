@@ -4,7 +4,6 @@ public class Calculator {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) { // closed automatically
             double num1, num2, result = 0;
-            char operator;
 
             System.out.println("=== My Personal Calculator ===");
 
@@ -16,7 +15,12 @@ public class Calculator {
             num1 = scanner.nextDouble();
 
             System.out.print("Enter operator (+, -, *, /): ");
-            operator = scanner.next().charAt(0);
+            String operatorInput = scanner.next();
+            if (operatorInput.length() != 1) {
+                System.out.println("Error: Please enter a single character operator.");
+                return;
+            }
+            char operator = operatorInput.charAt(0);
 
             System.out.print("Enter second number: ");
             if (!scanner.hasNextDouble()) {
