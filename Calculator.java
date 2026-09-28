@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * A small command-line calculator. Reads two numbers and an operator from
+ * standard input, prints the result, and exits.
+ */
 public class Calculator {
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) { // closed automatically
