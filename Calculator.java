@@ -33,12 +33,22 @@ public class Calculator {
 
             try {
                 double result = calculate(num1, operator, num2);
-                System.out.println("Result: " + result);
+                System.out.println("Result: " + formatResult(result));
             } catch (IllegalArgumentException exception) {
                 System.out.println("Error: " + exception.getMessage());
             }
             System.out.println("==================================");
         }
+    }
+
+    /**
+     * Formats a result for display: whole numbers print without a trailing ".0".
+     */
+    private static String formatResult(double value) {
+        if (Double.isFinite(value) && value == Math.floor(value) && Math.abs(value) < 9e15) {
+            return String.valueOf((long) value);
+        }
+        return String.valueOf(value);
     }
 
     /**
