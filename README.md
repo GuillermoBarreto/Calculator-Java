@@ -10,3 +10,18 @@ A personal command-line calculator written in Java.
 ```sh
 javac Calculator.java && java Calculator
 ```
+
+## Test
+```sh
+javac Calculator.java CalculatorTest.java && java CalculatorTest
+```
+
+## Example
+```
+=== My Personal Calculator ===
+Enter first number: 7
+Enter operator (+, -, *, /): /
+Enter second number: 2
+Result: 3.5
+==================================
+```
