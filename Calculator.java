@@ -23,6 +23,10 @@ public class Calculator {
                 return;
             }
             char operator = operatorInput.charAt(0);
+            if (!isValidOperator(operator)) {
+                System.out.println("Error: Invalid operator: '" + operator + "'. Use one of +, -, *, /.");
+                return;
+            }
 
             System.out.print("Enter second number: ");
             if (!scanner.hasNextDouble()) {
@@ -49,6 +53,13 @@ public class Calculator {
             return String.valueOf((long) value);
         }
         return String.valueOf(value);
+    }
+
+    /**
+     * Returns true for the supported operators: +, -, *, /.
+     */
+    static boolean isValidOperator(char operator) {
+        return operator == '+' || operator == '-' || operator == '*' || operator == '/';
     }
 
     /**
