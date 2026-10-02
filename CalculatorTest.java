@@ -14,6 +14,15 @@ public class CalculatorTest {
         }
     }
 
+    private static void checkTrue(String name, boolean condition) {
+        if (!condition) {
+            System.out.println("FAIL " + name);
+            failures++;
+        } else {
+            System.out.println("PASS " + name);
+        }
+    }
+
     private static void checkThrows(String name, Runnable action) {
         try {
             action.run();
@@ -31,6 +40,12 @@ public class CalculatorTest {
         check("divide", Calculator.calculate(7, '/', 2), 3.5);
         checkThrows("divide by zero", () -> Calculator.calculate(1, '/', 0));
         checkThrows("unknown operator", () -> Calculator.calculate(1, '%', 2));
+        checkTrue("operator '+' is valid", Calculator.isValidOperator('+'));
+        checkTrue("operator '-' is valid", Calculator.isValidOperator('-'));
+        checkTrue("operator '*' is valid", Calculator.isValidOperator('*'));
+        checkTrue("operator '/' is valid", Calculator.isValidOperator('/'));
+        checkTrue("operator '%' is invalid", !Calculator.isValidOperator('%'));
+        checkTrue("operator 'x' is invalid", !Calculator.isValidOperator('x'));
 
         if (failures > 0) {
             System.out.println(failures + " check(s) failed");
