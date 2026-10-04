@@ -47,8 +47,10 @@ public class Calculator {
 
     /**
      * Formats a result for display: whole numbers print without a trailing ".0".
+     * Package-visible (like isValidOperator) so the formatting rules can be
+     * covered by CalculatorTest.
      */
-    private static String formatResult(double value) {
+    static String formatResult(double value) {
         if (Double.isFinite(value) && value == Math.floor(value) && Math.abs(value) < 9e15) {
             return String.valueOf((long) value);
         }
