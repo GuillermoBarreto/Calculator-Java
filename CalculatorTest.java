@@ -23,6 +23,15 @@ public class CalculatorTest {
         }
     }
 
+    private static void checkString(String name, String actual, String expected) {
+        if (!actual.equals(expected)) {
+            System.out.println("FAIL " + name + ": expected \"" + expected + "\" but got \"" + actual + "\"");
+            failures++;
+        } else {
+            System.out.println("PASS " + name);
+        }
+    }
+
     private static void checkThrows(String name, Runnable action) {
         try {
             action.run();
@@ -46,6 +55,12 @@ public class CalculatorTest {
         checkTrue("operator '/' is valid", Calculator.isValidOperator('/'));
         checkTrue("operator '%' is invalid", !Calculator.isValidOperator('%'));
         checkTrue("operator 'x' is invalid", !Calculator.isValidOperator('x'));
+
+        checkString("format whole number drops .0", Calculator.formatResult(5), "5");
+        checkString("format fraction keeps decimals", Calculator.formatResult(3.5), "3.5");
+        checkString("format negative zero as 0", Calculator.formatResult(-0.0), "0");
+        checkString("format large whole number", Calculator.formatResult(8e15), "8000000000000000");
+        checkString("format huge value falls back to scientific", Calculator.formatResult(1e16), "1.0E16");
 
         if (failures > 0) {
             System.out.println(failures + " check(s) failed");
