@@ -32,13 +32,26 @@ public class CalculatorTest {
         }
     }
 
-    private static void checkThrows(String name, Runnable action) {
+    private static void checkThrows(String name, Runnable action, String expectedMessagePart) {
         try {
             action.run();
             System.out.println("FAIL " + name + ": expected IllegalArgumentException");
             failures++;
         } catch (IllegalArgumentException expected) {
-            System.out.println("PASS " + name);
+            String message = expected.getMessage();
+            if (message != null && message.contains(expectedMessagePart)) {
+                System.out.println("PASS " + name);
+            } else {
+                System.out.println("FAIL " + name + ": message \"" + message
+                        + "\" did not contain \"" + expectedMessagePart + "\"");
+                failures++;
+            }
+        } catch (Throwable unexpected) {
+            // A different error type means the code failed for the wrong
+            // reason; report it instead of letting the runner crash.
+            System.out.println("FAIL " + name + ": unexpected "
+                    + unexpected.getClass().getSimpleName() + ": " + unexpected.getMessage());
+            failures++;
         }
     }
 
@@ -47,8 +60,8 @@ public class CalculatorTest {
         check("subtract", Calculator.calculate(5, '-', 8), -3);
         check("multiply", Calculator.calculate(2.5, '*', 4), 10);
         check("divide", Calculator.calculate(7, '/', 2), 3.5);
-        checkThrows("divide by zero", () -> Calculator.calculate(1, '/', 0));
-        checkThrows("unknown operator", () -> Calculator.calculate(1, '%', 2));
+        checkThrows("divide by zero", () -> Calculator.calculate(1, '/', 0), "zero");
+        checkThrows("unknown operator", () -> Calculator.calculate(1, '%', 2), "Invalid operator");
         checkTrue("operator '+' is valid", Calculator.isValidOperator('+'));
         checkTrue("operator '-' is valid", Calculator.isValidOperator('-'));
         checkTrue("operator '*' is valid", Calculator.isValidOperator('*'));
