@@ -60,6 +60,8 @@ public class CalculatorTest {
         check("subtract", Calculator.calculate(5, '-', 8), -3);
         check("multiply", Calculator.calculate(2.5, '*', 4), 10);
         check("divide", Calculator.calculate(7, '/', 2), 3.5);
+        check("subtract into negative", Calculator.calculate(3, '-', 8), -5);
+        check("multiply two negatives", Calculator.calculate(-2.5, '*', -4), 10);
         checkThrows("divide by zero", () -> Calculator.calculate(1, '/', 0), "zero");
         checkThrows("unknown operator", () -> Calculator.calculate(1, '%', 2), "Invalid operator");
         checkTrue("operator '+' is valid", Calculator.isValidOperator('+'));
@@ -74,6 +76,7 @@ public class CalculatorTest {
         checkString("format negative zero as 0", Calculator.formatResult(-0.0), "0");
         checkString("format large whole number", Calculator.formatResult(8e15), "8000000000000000");
         checkString("format huge value falls back to scientific", Calculator.formatResult(1e16), "1.0E16");
+        checkString("format whole-number division result", Calculator.formatResult(Calculator.calculate(8, '/', 2)), "4");
 
         if (failures > 0) {
             System.out.println(failures + " check(s) failed");
