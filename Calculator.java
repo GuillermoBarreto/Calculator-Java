@@ -30,7 +30,7 @@ public class Calculator {
 
             System.out.print("Enter second number: ");
             if (!scanner.hasNextDouble()) {
-                System.out.println("Error: Please enter a valid number.");
+                System.out.println("Error: Please enter a valid second number.");
                 return;
             }
             double num2 = scanner.nextDouble();
