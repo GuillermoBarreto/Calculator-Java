@@ -15,6 +15,11 @@ public class Calculator {
                 return;
             }
             double num1 = scanner.nextDouble();
+            // hasNextDouble() also accepts NaN/Infinity, which are not real inputs.
+            if (!Double.isFinite(num1)) {
+                System.out.println("Error: Please enter a finite number.");
+                return;
+            }
 
             System.out.print("Enter operator (+, -, *, /): ");
             String operatorInput = scanner.next();
@@ -34,6 +39,10 @@ public class Calculator {
                 return;
             }
             double num2 = scanner.nextDouble();
+            if (!Double.isFinite(num2)) {
+                System.out.println("Error: Please enter a finite second number.");
+                return;
+            }
 
             try {
                 double result = calculate(num1, operator, num2);
