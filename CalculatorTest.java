@@ -77,6 +77,9 @@ public class CalculatorTest {
         checkString("format large whole number", Calculator.formatResult(8e15), "8000000000000000");
         checkString("format huge value falls back to scientific", Calculator.formatResult(1e16), "1.0E16");
         checkString("format whole-number division result", Calculator.formatResult(Calculator.calculate(8, '/', 2)), "4");
+        checkString("format NaN stays NaN", Calculator.formatResult(Double.NaN), "NaN");
+        checkString("format positive infinity", Calculator.formatResult(Double.POSITIVE_INFINITY), "Infinity");
+        checkString("format negative infinity", Calculator.formatResult(Double.NEGATIVE_INFINITY), "-Infinity");
 
         if (failures > 0) {
             System.out.println(failures + " check(s) failed");
